@@ -1,0 +1,125 @@
+<meta charset="UTF-8">
+
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    function desenhaQuadrado(x, y, tamanho, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.fillRect(x, y, tamanho, tamanho)
+        pincel.fill();
+    }
+
+    function desenhaCirculo(x, y, raio, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * 3.14);
+        pincel.fill();
+
+    }
+
+    function desenhaPaletaDeCores() {
+
+        desenhaQuadrado(xRosa, yQuadrados, tamanhoQuadrados, 'hotpink');
+        desenhaQuadrado(xPink, yQuadrados, tamanhoQuadrados, 'mediumvioletred');
+        desenhaQuadrado(xLilas, yQuadrados, tamanhoQuadrados, '#870ec6');
+        desenhaQuadrado(xRoxo, yQuadrados, tamanhoQuadrados, 'indigo');
+        desenhaQuadrado(xAzulClaro, yQuadrados, tamanhoQuadrados, '#3b97f9');
+        desenhaQuadrado(xAzulEscuro, yQuadrados, tamanhoQuadrados, '#0054ad');
+        desenhaQuadrado(xVerdeClaro, yQuadrados, tamanhoQuadrados, '#2a9d8f');
+        desenhaQuadrado(xVerdeEscuro, yQuadrados, tamanhoQuadrados, '#264653');
+        desenhaQuadrado(xAmarelo, yQuadrados, tamanhoQuadrados, '#e9c46a');
+        desenhaQuadrado(xLaranja, yQuadrados, tamanhoQuadrados, '#f4a261');
+        desenhaQuadrado(xSalmao, yQuadrados, tamanhoQuadrados, '#ee6055');
+        desenhaQuadrado(xMarrom, yQuadrados, tamanhoQuadrados, '#a44a3f');
+
+    }
+
+    function lidaComMovimentoDoMouse(evento) {
+
+        var x = evento.pageX - tela.offsetLeft;
+        var y = evento.pageY - tela.offsetTop;
+
+        if(desenha) {
+
+            desenhaCirculo(x, y, 5, corAtual);
+        }
+    }
+
+    function habilitaDesenhar() {
+
+        desenha = true;
+    }
+
+    function desabilitaDesenhar() {
+
+        desenha = false;
+    }
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var desenha = false;
+    var corAtual = 'white';
+    var xRosa = 0;
+    var xPink  = 50;
+    var xLilas = 100
+    var xRoxo = 150;
+    var xAzulClaro = 200;
+    var xAzulEscuro = 250;
+    var xVerdeClaro = 300;
+    var xVerdeEscuro = 350;
+    var xAmarelo = 400;
+    var xLaranja = 450;
+    var xSalmao = 500;
+    var xMarrom = 550;
+    var yQuadrados = 0;
+    var tamanhoQuadrados = 50;
+    
+
+    function selecionaCor(evento){
+        var x = evento.pageX - tela.offsetLeft;
+        var y = evento.pageY - tela.offsetTop;
+        
+        if((x < xRosa + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="hotpink"
+        }else if((x < xPink + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="mediumvioletred"
+        }else if((x < xLilas + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#870ec6"
+        }else if((x < xRoxo + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="indigo"
+        }else if((x < xAzulClaro + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#3b97f9"
+        }else if((x < xAzulEscuro + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#0054ad"
+        }else if((x < xVerdeClaro + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#2a9d8f"
+        }else if((x < xVerdeEscuro + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#264653"
+        }else if((x < xAmarelo + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#e9c46a"
+        }else if((x < xLaranja + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#f4a261"
+        }else if((x < xSalmao + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#ee6055"
+        }else if((x < xMarrom + tamanhoQuadrados) && (y < yQuadrados + tamanhoQuadrados)){
+            corAtual="#a44a3f"
+        }
+    }
+
+    desenhaPaletaDeCores(); // mostra os quadrados de seleção de cores
+
+    tela.onmousemove = lidaComMovimentoDoMouse;
+
+    tela.onmousedown = habilitaDesenhar;
+
+    tela.onmouseup = desabilitaDesenhar;
+
+    tela.onclick = selecionaCor
+
+</script>
