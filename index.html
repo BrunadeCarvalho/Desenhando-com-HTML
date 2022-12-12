@@ -1,8 +1,12 @@
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/style.css">
 
 <canvas width="600" height="400"></canvas>
 
 <script>
+    
+    var cores = document.querySelector('input');
+
 
     function desenhaQuadrado(x, y, tamanho, cor) {
 
@@ -13,12 +17,13 @@
 
     function desenhaCirculo(x, y, raio, cor) {
 
-        pincel.fillStyle = cor;
+        pincel.fillStyle = cor
         pincel.beginPath();
         pincel.arc(x, y, raio, 0, 2 * 3.14);
         pincel.fill();
 
     }
+
 
     function desenhaPaletaDeCores() {
 
@@ -41,11 +46,17 @@
 
         var x = evento.pageX - tela.offsetLeft;
         var y = evento.pageY - tela.offsetTop;
-
+        
         if(desenha) {
-
             desenhaCirculo(x, y, 5, corAtual);
         }
+
+        if(evento.shiftKey && evento.altKey){
+            alert("Pressionar uma tecla de cada vez.")
+        }else if(evento.shiftKey){
+            desenhaCirculo(x, y, 10, corAtual);
+        }
+
     }
 
     function habilitaDesenhar() {
@@ -123,3 +134,16 @@
     tela.onclick = selecionaCor
 
 </script>
+
+<h3 class="titulo">Como usar:</h3>
+<div class="paragrafo">
+    <ul>
+        <li><span>Aumentar o raio do circulo:</span> Pressione a tecla shift, o raio irá aumentar de 5 para 10, 
+            porém ao soltar a tecla, o raio do circulo retornará para seu tamanho incial.</li>
+        <li><span>Trocar de cor: </span> Você poderá alterar entre as 12 cores disponíveis no cabeçalho do card,
+            basta clicar em cima da cor desejada.</li>
+        <li><span>Apagar o desenho já criado: </span> Ainda não criamos a funcionalidade da borracha, para iniciar
+        um novo desenho é necessário recarregar a página (F5).</li>
+
+    </ul>
+</div>
